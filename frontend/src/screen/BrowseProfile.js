@@ -27,7 +27,7 @@ function BrowseProfile() {
     }, []);
 
     async function loadData() {
-        let result = await fetch("http://localhost:5000/api/browseprofile", {
+        let result = await fetch("https://profile-management-system.onrender.com/api/browseprofile", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

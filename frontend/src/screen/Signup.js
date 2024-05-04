@@ -22,7 +22,7 @@ function Signup() {
     const collectData = async (e) => {
         e.preventDefault();
         console.log(name, hireable, password, password1, email, date, github, website, location, bio, fieldofinterest, seeking, techstack);
-        let result = await fetch("http://localhost:5000/api/createuser", {
+        let result = await fetch("https://profile-management-system.onrender.com/api/createuser", {
             method: 'POST',
             body: JSON.stringify({ name, hireable, password, password1, email, date, github, website, location, bio, fieldofinterest, seeking, techstack }),
             headers: {

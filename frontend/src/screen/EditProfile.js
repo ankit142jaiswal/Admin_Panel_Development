@@ -21,7 +21,7 @@ function EditProfile() {
   const [users, setUsers] = useState([]);
  
   async function getList() {
-    let result = await fetch(`http://localhost:5000/api/userprofile`, {
+    let result = await fetch(`https://profile-management-system.onrender.com/api/userprofile`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',

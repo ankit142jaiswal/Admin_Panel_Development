@@ -29,7 +29,7 @@ const ViewProfile = (props) => {
 
     // async function getList() {
 
-    // fetch(`http://localhost:5000/api/browseprofile/`).then((result) => {
+    // fetch(`https://profile-management-system.onrender.com/api/browseprofile/`).then((result) => {
     //         result.json().then((resp) => {
     //         setUsers(resp)
 

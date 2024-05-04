@@ -8,6 +8,7 @@
     "dev": "node index.js",
     "build": "npm i"
   },
+  "proxy": "https://profile-management-system.onrender.com",
   "author": "",
   "license": "ISC",
   "dependencies": {
