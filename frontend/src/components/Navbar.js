@@ -13,7 +13,7 @@ function Navbar() {
         <div>
             <nav className='navbar navbar-expand-lg navbar-dark bg-success ' >
                 <div className='container-fluid'>
-                    <Link className='navbar-brand fs-1' to='/'>Profile Management System</Link>
+                    <Link className='navbar-brand fs-1' to='/'>Admin Pannel Developement</Link>
                     <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav'>
                         <span className='navbar-toggler-icon'></span>
                     </button>
