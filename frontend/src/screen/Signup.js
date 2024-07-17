@@ -36,20 +36,13 @@ function Signup() {
 
         if (!data.success) {
             window.alert("Enter the valid Credential");
-        }       
+        }
         if (data.success) {
             navigate('/login');
 
         }
 
-
-
-        
     }
-
-
-
-
 
 
     return (
