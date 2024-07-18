@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-function Signup() {
-
+function AddNewUser() {
 
     const [name, setName] = useState("");
     const [hireable, setHireable] = useState("");
@@ -22,7 +21,7 @@ function Signup() {
     const collectData = async (e) => {
         e.preventDefault();
         console.log(name, hireable, password, password1, email, date, github, website, location, bio, fieldofinterest, seeking, techstack);
-        let result = await fetch("https://profile-management-system.onrender.com/api/createuser", {
+        let result = await fetch("https://profile-management-system.onrender.com/api/addnewuser", {
             method: 'POST',
             body: JSON.stringify({ name, hireable, password, password1, email, date, github, website, location, bio, fieldofinterest, seeking, techstack }),
             headers: {
@@ -38,7 +37,8 @@ function Signup() {
             window.alert("Enter the valid Credential");
         }
         if (data.success) {
-            navigate('/login');
+            window.alert("New User Added Successfully !!");
+            navigate('/browseprofile');
 
         }
 
@@ -49,7 +49,7 @@ function Signup() {
         <div className='container mt-5'>
             <form>
                 <div className='row' style={{ textAlign: "center", fontSize: "larger", backgroundColor: "white", fontWeight: "bolder", boxShadow: "0 0 10px 1px rgba(0, 0, 0, 0.2)", borderRadius: "5px" }}>
-                    <h2 style={{ textAlign: "center" }} className='mb-5 pt-5'>New User Sign Up<hr /></h2>
+                    <h1 style={{ textAlign: "center" }} className='mb-5 pt-5'>Add New User <hr /></h1>
                     <div className='col-7 p-5'>
                         <div className="mb-3 row  ">
                             <div className='col-2'>
@@ -77,26 +77,7 @@ function Signup() {
                             <div className='col-auto'>
                                 <input type="email" className="form-control" id="email" placeholder='enter your email' value={email} onChange={(e) => setEmail(e.target.value)} /></div>
                         </div>
-                        <div className="mb-3 row">
-                            <div className='col-2'>
 
-                                <label htmlFor="password" className="form-label">Password</label>
-                            </div>
-                            <div className='col-auto'>
-
-                                <input type="password" className="form-control" id="password" placeholder='enter password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                            </div>
-                        </div>
-                        <div className="mb-3 row">
-                            <div className='col-2'>
-
-                                <label htmlFor="password1" className="form-label">Password</label>
-                            </div>
-                            <div className='col-auto'>
-
-                                <input type="password" className="form-control" id="password1" placeholder='Re-enter password' value={password1} onChange={(e) => setPassword1(e.target.value)} />
-                            </div>
-                        </div>
                         <div className="mb-3 row">
                             <div className='col-2'>
 
@@ -231,18 +212,19 @@ function Signup() {
                                 </select>
                             </div>
                         </div>
-                        <div className='mb-3 row'>
-                            <div className='col-4'></div>
-                            <div className='col-auto'>
 
-                                <Link to='/login' className="btn btn-info">Already auser</Link>
-                            </div>
-                            <div className='col-auto'>
-                                <button type="button" className="btn btn-success" onClick={collectData}>SignUp</button>
+                    </div>
+                    <div className='mb-5 row' style={{justifyContent: 'center'}}>
 
-                            </div>
+                        <div className='col-auto'>
+
+                            <Link to='/browseprofile' className="btn btn-info">Back</Link>
+                        </div>
+                        <div className='col-auto'>
+                            <button type="button" className="btn btn-success" onClick={collectData}>Add New User</button>
 
                         </div>
+
                     </div>
                 </div>
             </form>
@@ -250,4 +232,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default AddNewUser

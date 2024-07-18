@@ -148,11 +148,10 @@ function EditProfile() {
 
   return (
 
-    <div className='container'>
-      <h1 style={{ textAlign: "center" }} className='mb-5'>Edit Profile <hr /></h1>
+    <div className='container mt-5'>
       <form>
         <div className='row' style={{ textAlign: "center", fontSize: "larger", backgroundColor: "white", fontWeight: "bolder", boxShadow: "0 0 10px 1px rgba(0, 0, 0, 0.2)", borderRadius: "5px" }}>
-          <h2 style={{ textAlign: "center" }} className='mb-5 pt-3'>Academy Student Sign Up</h2>
+          <h1 style={{ textAlign: "center" }} className='mb-5 pt-3'>Edit User Profile <hr /></h1>
           <div className='col-7 p-5'>
             <div className="mb-3 row ">
               <div className='col-2'>

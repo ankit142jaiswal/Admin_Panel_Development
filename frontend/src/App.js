@@ -10,7 +10,8 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
 import Home from './screen/Home.js';
 import ViewProfile from './screen/ViewProfile.js';
-import DmStudent from './screen/DmStudent.js';
+import DmUser from './screen/DmUser.js';
+import AddNewUser from './screen/AddNewUser.js'
 
 function App() {
   return (
@@ -19,12 +20,13 @@ function App() {
       <div className="App">
         <Routes >
           <Route exact path='/' element={<Home/>} />
-          <Route exact path='/browse-profile' element={<BrowseProfile/>} />
-          <Route exact path='/edit-profile' element={<EditProfile/>} />
+          <Route exact path='/browseprofile' element={<BrowseProfile/>} />
+          <Route exact path='/editprofile' element={<EditProfile/>} />
           <Route exact path='/login' element={<Login/>} />
           <Route exact path='/signup' element={<Signup/>} />
           <Route exact path='/viewprofile' element={<ViewProfile />} />
-          <Route exact path='/dmstudent' element={<DmStudent />} />
+          <Route exact path='/dmuser' element={<DmUser />} />
+          <Route exact path='/addnewuser' element={<AddNewUser />} />
 
 
 

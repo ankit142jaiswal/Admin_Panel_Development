@@ -26,14 +26,14 @@ function Navbar() {
 
                             {(localStorage.getItem("authToken")) ?
                                 <li className='nav-item  '>
-                                    <Link className='nav-link active fs-5' aria-current="page" to="/browse-profile">Browse Profile</Link>
+                                    <Link className='nav-link active fs-5' aria-current="page" to="/browseprofile">Browse Profile</Link>
                                 </li>
 
                                 : ""
                             }
                             {(localStorage.getItem("authToken")) ?
                                 <li className='nav-item  '>
-                                    <Link className='nav-link active fs-5' aria-current="page" to="/edit-profile">Edit Profile</Link>
+                                    <Link className='nav-link active fs-5' aria-current="page" to="/editprofile">Edit Profile</Link>
                                 </li>
 
                                 : ""
