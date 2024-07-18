@@ -43,10 +43,4 @@ router.delete('/deletebrowseuser/:_id',
         }
     })
 
-
-
-
-
-
-
 module.exports = router;

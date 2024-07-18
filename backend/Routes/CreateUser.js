@@ -4,7 +4,8 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtSecret = "MynameisEndtoEndYoutubeChannel$#"
+const jwtSecret = "MynameisEndtoEndYoutubeChannel$#";
+const BrowseProfile = require('../models/BrowseProfile');
 
 router.post('/createuser',
     [
@@ -21,41 +22,89 @@ router.post('/createuser',
         }
         const salt = await bcrypt.genSalt(10);
         let email = req.body.email;
-        let password= req.body.password;
-        let password1= req.body.password1;
+        let password = req.body.password;
+        let password1 = req.body.password1;
 
-        let secPassword = await bcrypt.hash(req.body.password ,salt)
-        let secPassword1 = await bcrypt.hash(req.body.password1 ,salt)
+        let secPassword = await bcrypt.hash(req.body.password, salt)
+        let secPassword1 = await bcrypt.hash(req.body.password1, salt)
         try {
-            let userData = await User.findOne({email}); 
-            if (userData){            
+            let userData = await User.findOne({ email });
+            if (userData) {
                 return resp.status(400).json({ errors: "Email Alredy in Use !! Try SingUp with Other Email" });
 
             }
-            if (password != password1){
-            return resp.status(400).json({ errors: "Password Missmatch ! Please Enter same Password" });
+            if (password != password1) {
+                return resp.status(400).json({ errors: "Password Missmatch ! Please Enter same Password" });
 
             }
-            else{
+            else {
 
                 await User.create({
                     name: req.body.name,
                     hireable: req.body.hireable,
-                    password : secPassword,
+                    password: secPassword,
                     password1: secPassword1,
                     email: req.body.email,
-                date: req.body.date,
-                github: req.body.github,
-                website: req.body.website,
-                location: req.body.location,
-                bio: req.body.bio,
-                fieldofinterest: req.body.fieldofinterest,
-                seeking: req.body.seeking,
-                techstack: req.body.techstack
+                    date: req.body.date,
+                    github: req.body.github,
+                    website: req.body.website,
+                    location: req.body.location,
+                    bio: req.body.bio,
+                    fieldofinterest: req.body.fieldofinterest,
+                    seeking: req.body.seeking,
+                    techstack: req.body.techstack
 
-            })
-           return resp.json({ success: true });
+                })
+                return resp.json({ success: true });
+            }
+
+        } catch (error) {
+            console.log(error)
+            return resp.json({ success: false });
+
+
         }
+
+
+    })
+
+router.post('/addnewuser',
+    [
+        body('email').isEmail(),
+    ]
+    ,
+    async (req, resp) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return resp.status(400).json({ errors: errors.array() })
+        }
+
+        try {
+            let userData = await User.findOne({ email });
+            if (userData) {
+                return resp.status(400).json({ errors: "Email Alredy in Use !! Try SingUp with Other Email" });
+
+            }
+
+            else {
+
+                await BrowseProfile.create({
+                    name: req.body.name,
+                    hireable: req.body.hireable,
+                    email: req.body.email,
+                    date: req.body.date,
+                    github: req.body.github,
+                    website: req.body.website,
+                    location: req.body.location,
+                    bio: req.body.bio,
+                    fieldofinterest: req.body.fieldofinterest,
+                    seeking: req.body.seeking,
+                    techstack: req.body.techstack
+
+                })
+                return resp.json({ success: true });
+            }
 
         } catch (error) {
             console.log(error)
@@ -70,44 +119,44 @@ router.post('/createuser',
 
 
 router.post('/loginuser',
-[
-    body('email').isEmail(),
-    body('password', 'Incorrect Password').isLength({ min: 5 })
-]
-,
-async (req, resp) => {
+    [
+        body('email').isEmail(),
+        body('password', 'Incorrect Password').isLength({ min: 5 })
+    ]
+    ,
+    async (req, resp) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return resp.status(400).json({ errors: errors.array() })
-    }
-    let email =  req.body.email;
-    try {
-        let userData = await User.findOne({email});
-        if (!userData ){
-            return resp.status(400).json({ errors: "Try logging with correct Credentials" });
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return resp.status(400).json({ errors: errors.array() })
         }
-        const pwdCopmare = await bcrypt.compare(req.body.password,userData.password);
+        let email = req.body.email;
+        try {
+            let userData = await User.findOne({ email });
+            if (!userData) {
+                return resp.status(400).json({ errors: "Try logging with correct Credentials" });
+            }
+            const pwdCopmare = await bcrypt.compare(req.body.password, userData.password);
 
-      if (!pwdCopmare){
-        return resp.status(400).json({ errors: "Try logging with correct Credentials" });
+            if (!pwdCopmare) {
+                return resp.status(400).json({ errors: "Try logging with correct Credentials" });
 
-      }else{
-          const data = {
-              user: {
-                id:userData.id
-              }
+            } else {
+                const data = {
+                    user: {
+                        id: userData.id
+                    }
+                }
+                const authToken = jwt.sign(data, jwtSecret)
+                return resp.json({ success: true, authToken: authToken });
+            }
+
+        } catch (error) {
+            console.log(error)
+            resp.json({ success: false });
         }
-        const authToken = jwt.sign(data,jwtSecret)
-        return resp.json({ success: true, authToken : authToken });            
-      }
-
-    } catch (error) {
-        console.log(error)
-        resp.json({ success: false });
-    }
-})
+    })
 
 
 
-module.exports= router;
+module.exports = router;

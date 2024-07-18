@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtSecret = "MynameisEndtoEndYoutubeChannel$#"
-const mongoose = require('mongoose')
 
 router.put('/updateuser/:_id', [
     body('email').isEmail(),

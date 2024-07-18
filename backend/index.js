@@ -5,6 +5,7 @@ app.use(cors());
 const dbConnect = require('./mongodb');
 app.use(express.json());
 
+
 app.use((req,resp,next)=>{
     resp.header("Access-Control-Allow-Origin","*");
     resp.header(
@@ -20,12 +21,9 @@ app.use((req,resp,next)=>{
 
 
 app.use('/api', require("./Routes/CreateUser"));
-app.use('/api', require("./Routes/DisplayData"));
+app.use('/api', require("./Routes/DisplayUser"));
 app.use('/api', require("./Routes/UpdateUser"));
 app.use('/api', require("./Routes/DeleteUser"));
-
-
-
 
 
 
